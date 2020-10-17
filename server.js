@@ -18,13 +18,30 @@ app.get("/", function (request, response) {
 
 //START OF YOUR CODE...
 app.get('/quotes', (req, res) => {
-  res.json(quotes);
-})
+ res.json(quotes);
+});
 
 app.get('/quotes/random', (req, res) => {
  let randomNumber = [Math.floor(Math.random() * quotes.length)];
  res.send(quotes[randomNumber]);
  });
+
+ app.get('/search', (req, res) => {
+  let termQ = req.query.term;
+  for(let i=0; i< quotes.length -1; i++){
+    if(quotes[i].quote.toLowerCase().includes(termQ)
+     || quotes[i].author.toLowerCase().includes(termQ)){
+      res.json(quotes[i].quote + " " + quotes[i].author);
+    }
+  }
+  res.json([]);
+})
+
+
+app.get('/echo', (req, res)=> {
+  let wordQ = req.query.word;
+  res.json(`you searched for the word: ${wordQ}`);
+});
 //...END OF YOUR CODE
 
 //You can use this function to pick one element at random from a given array
