@@ -26,7 +26,7 @@ app.get('/quotes/random', (req, res) => {
  res.send(quotes[randomNumber]);
  });
 
- app.get('/search', (req, res) => {
+ app.get('/quote/search', (req, res) => {
   let termQ = req.query.term;
   for(let i=0; i< quotes.length -1; i++){
     if(quotes[i].quote.toLowerCase().includes(termQ)
