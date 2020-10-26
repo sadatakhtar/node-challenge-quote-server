@@ -13,7 +13,7 @@ const quotes = require("./quotes.json");
 //   /quotes            - Should return all quotes (json)
 //   /quotes/random     - Should return ONE quote (json)
 app.get("/", function (request, response) {
-  response.send("CYF's Quote Server!  Ask me for /quotes/random, or /quotes");
+  response.send("Sadat's Quote Server!  Ask me for /quotes/random, or /quotes");
 });
 
 //START OF YOUR CODE...
@@ -26,14 +26,17 @@ app.get('/quotes/random', (req, res) => {
  res.send(quotes[randomNumber]);
  });
 
- app.get('/quote/search', (req, res) => {
+ app.get('/quotes/search', (req, res) => {
   let termQ = req.query.term;
-  for(let i=0; i< quotes.length -1; i++){
-    if(quotes[i].quote.toLowerCase().includes(termQ)
-     || quotes[i].author.toLowerCase().includes(termQ)){
-      res.json(quotes[i].quote + " " + quotes[i].author);
-    }
-  }
+
+  let queryResult = quotes.filter(e => e.quote.toLowerCase().includes(termQ));
+  res.json(queryResult);
+  // for(let i=0; i< quotes.length -1; i++){
+  //   if(quotes[i].quote.toLowerCase().includes(termQ)
+  //    || quotes[i].author.toLowerCase().includes(termQ)){
+  //     res.json(quotes[i].quote + " " + quotes[i].author);
+  //   }
+  // }
   res.json([]);
 })
 
